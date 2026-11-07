@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { supabase, supabaseReady } from "@/lib/supabase";
 
-type Project = { id:string; title:string; company_name:string; category:string; description:string; budget:number; status:string; created_at:string;duration?: string; };
+type Project = { id:string; title:string; company_name:string; category:string; description:string; budget:number; status:string; created_at:string;duration?: string;work_mode?: string; };
 type Profile = { id:string; full_name:string|null; role:string; verification_status:string };
 
 export default function Home() {
