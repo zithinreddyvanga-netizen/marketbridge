@@ -45,7 +45,7 @@ export default function Home() {
   async function postProject(e:React.FormEvent<HTMLFormElement>){
     e.preventDefault();if(!supabase||!session)return;setBusy(true);setMessage("");
     const f=new FormData(e.currentTarget);
-    const payload={owner_id:session.user.id,title:String(f.get("title")),company_name:String(f.get("company")),category:String(f.get("category")),description:String(f.get("description")),budget:Number(f.get("budget")),duration:String(f.get("duration")),work_mode:String(f.get("work_mode")),required_skills:String(f.get("skills")).split(",").map(x=>x.trim()).filter(Boolean),status:"open"};
+    const payload={user_id:session.user.id,title:String(f.get("title")),company_name:String(f.get("company")),category:String(f.get("category")),description:String(f.get("description")),budget:Number(f.get("budget")),duration:String(f.get("duration")),work_mode:String(f.get("work_mode")),required_skills:String(f.get("skills")).split(",").map(x=>x.trim()).filter(Boolean),status:"open"};
     const {error}=await supabase.from("projects").insert(payload);
     setMessage(error?.message||"Project published. Matching and notifications can be enabled after the automation provider is connected.");
     setBusy(false);(e.currentTarget as HTMLFormElement).reset();await load();
