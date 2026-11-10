@@ -53,7 +53,14 @@ export default function Home() {
   async function submitProposal(e:React.FormEvent<HTMLFormElement>,projectId:string){
     e.preventDefault();if(!supabase||!session)return;setBusy(true);
     const f=new FormData(e.currentTarget);
-    const {error}=await supabase.from("proposals").insert({project_id:projectId,marketer_id:session.user.id,price:Number(f.get("price")),delivery_days:Number(f.get("days")),cover_message:String(f.get("message")),status:"submitted"});
+    const {error}=await supabase.from("proposals").insert({
+  project_id: projectId,
+  marketer_id: session.user.id,
+  proposed_budget: Number(f.get("price")),
+  delivery_days: Number(f.get("days")),
+  cover_letter: String(f.get("message")),
+  status: "pending"
+});
     setMessage(error?.message||"Proposal submitted.");setBusy(false);await load();
   }
 
