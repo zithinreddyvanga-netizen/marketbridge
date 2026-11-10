@@ -3,8 +3,20 @@ import { useEffect, useState } from "react";
 import { supabase, supabaseReady } from "@/lib/supabase";
 
 type Project = { id:string; title:string; company_name:string; category:string; description:string; budget:number; status:string; created_at:string;duration?: string;work_mode?: string; };
-type Profile = { id:string; full_name:string|null; role:string; verification_status:string };
-
+type Proposal = {
+  id: string;
+  project_id: string;
+  marketer_id: string;
+  proposed_budget: number;
+  delivery_days: number;
+  cover_letter: string;
+  status: string;
+  created_at: string;
+  projects?: {
+    title: string;
+    company_name: string;
+  } | null;
+};
 export default function Home() {
   const [session,setSession] = useState<any>(null);
   const [profile,setProfile] = useState<Profile|null>(null);
